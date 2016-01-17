@@ -1,0 +1,26 @@
+<p>There are currently <%= @contacts.count %> items in the database</p>
+
+<%#= form_tag(contacts_path, method: "get") do %>
+  <%#= select_tag(:state, options_from_collection_for_select(@contacts,"id","state")) %>
+<%# end %>
+
+<%#= form_tag(contacts_path, method: "get",remote: true) do %>
+<%= form_tag(contacts_path, method: "get") do %>
+  <p>Search by</p>
+  <%= select_tag(:attributes, options_for_select(@attributes), remote: true, prompt: "Select an attribute") %>
+  <%= select_tag(:state, options_for_select(@states, @prev_state)) %>
+  <%#= submit_tag "Search", remote: true, name: nil, class: "foo" %>
+  <%= submit_tag "Search", name: nil, class: "foo" %>
+<% end %>
+
+<% @selected_state.each do |selected| %>
+  <tr>
+    <td><%= selected.first_name %></td>
+    <td><%= selected.last_name %></td>
+    <td><%= selected.address %></td>
+    <td><%= selected.city %></td>
+    <td><%= selected.state %></td>
+    <td><%= selected.zip %></td>
+  </tr>
+  <br>
+<% end %>
